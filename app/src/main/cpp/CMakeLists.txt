@@ -9,22 +9,13 @@
 
 # Sets the minimum version of CMake required to build the native library.
 
-cmake_minimum_required(VERSION 3.4.1)
+cmake_minimum_required(VERSION 3.22.1)
 
 set (CMAKE_CXX_FLAGS "-DANDROID -DINCLUDE_USER_MODE -I./ -std=c++11")
 
-# Creates and names a library, sets it as either STATIC
-# or SHARED, and provides the relative paths to its source code.
-# You can define multiple libraries, and CMake builds them for you.
-# Gradle automatically packages shared libraries with your APK.
+project(wp34s VERSION 0.0.6)
 
-add_library( # Sets the name of the library.
-        wp34s
-
-        # Sets the library as a shared library.
-        SHARED
-
-        # Provides a relative path to your source file(s).
+file(GLOB SOURCES
         wp34s_android.cpp
         wp34s_wrapper.c
         alpha.c
@@ -166,6 +157,18 @@ add_library( # Sets the name of the library.
         consts/const_recipsqrt2PI.c
         consts/const_root2on2.c
         consts/const_sqrt2PI.c)
+
+# Creates and names a library, sets it as either STATIC
+# or SHARED, and provides the relative paths to its source code.
+# You can define multiple libraries, and CMake builds them for you.
+# Gradle automatically packages shared libraries with your APK.
+
+add_library( # Sets the name of the library.
+        wp34s
+        # Sets the library as a shared library.
+        SHARED
+        # Provides a relative path to your source file(s).
+        ${SOURCES})
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
